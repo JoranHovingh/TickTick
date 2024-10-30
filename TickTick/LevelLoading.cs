@@ -50,6 +50,7 @@ partial class Level : GameObjectList
         hintText.Text = description;
         hintText.LocalPosition = new Vector2(510, 40);
         AddChild(hintText);
+        
     }
 
     void AddPlayingField(List<string> gridRows, int gridWidth, int gridHeight)
@@ -78,6 +79,7 @@ partial class Level : GameObjectList
                 AddTile(x, y, symbol);
             }
         }
+
     }
 
     void AddTile(int x, int y, char symbol)
