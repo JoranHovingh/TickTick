@@ -13,7 +13,7 @@ namespace Engine
 
         void Update(GameTime gameTime);
 
-        void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 Offset);
 
         void Reset();
     }

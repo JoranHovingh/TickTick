@@ -82,10 +82,10 @@ namespace Engine
         /// </summary>
         /// <param name="gameTime">An object containing information about the time that has passed in the game.</param>
         /// <param name="spriteBatch">A sprite batch object used for drawing sprites.</param>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 Offset)
         {
             if (currentGameState != null)
-                currentGameState.Draw(gameTime, spriteBatch);
+                currentGameState.Draw(gameTime, spriteBatch, Offset);
         }
 
         /// <summary>

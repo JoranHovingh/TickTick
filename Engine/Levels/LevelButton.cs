@@ -52,11 +52,11 @@ namespace Engine.UI
             return "Sprites/UI/spr_level_solved";
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 Offset)
         {
-            base.Draw(gameTime, spriteBatch);
+            base.Draw(gameTime, spriteBatch, Offset);
             if (label != null)
-                label.Draw(gameTime, spriteBatch);
+                label.Draw(gameTime, spriteBatch, Offset);
         }
     }
 }

@@ -2,6 +2,7 @@ using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Net.Http.Headers;
 
 class Player : AnimatedGameObject
 {
@@ -21,12 +22,15 @@ class Player : AnimatedGameObject
     float desiredHorizontalSpeed; // The horizontal speed at which the character would like to move.
 
     Level level;
+
+    Camera camera;
     Vector2 startPosition;
     
     bool isCelebrating; // Whether or not the player is celebrating a level victory.
     bool isExploding;
 
     public bool IsAlive { get; private set; }
+
 
     public bool CanCollideWithObjects { get { return IsAlive && !isCelebrating; } }
 
@@ -36,6 +40,8 @@ class Player : AnimatedGameObject
     {
         this.level = level;
         this.startPosition = startPosition;
+
+        camera = new Camera();
 
         // load all animations
         LoadAnimation("Sprites/LevelObjects/Player/spr_idle", "idle", true, 0.1f);
@@ -136,7 +142,6 @@ class Player : AnimatedGameObject
     public override void Update(GameTime gameTime)
     {
         Vector2 previousPosition = localPosition;
-
         if (CanCollideWithObjects)
             ApplyFriction(gameTime);
         else
@@ -160,6 +165,8 @@ class Player : AnimatedGameObject
             else
                 level.Timer.Multiplier = 1;
         }
+
+        camera.Follow(BoundingBoxForCollisions);
             
     }
 
@@ -310,3 +317,4 @@ class Player : AnimatedGameObject
         velocity = Vector2.Zero;
     }
 }
+

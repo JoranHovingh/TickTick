@@ -29,6 +29,8 @@ namespace Engine
         /// </summary>
         Matrix spriteScale;
 
+        Camera camera;
+
         /// <summary>
         /// An object for generating random numbers throughout the game.
         /// </summary>
@@ -46,6 +48,10 @@ namespace Engine
 
         public static string ContentRootDirectory { get { return "Content"; } }
 
+        Vector2 Offset;
+        
+
+
         /// <summary>
         /// Creates a new ExtendedGame object.
         /// </summary>
@@ -62,6 +68,7 @@ namespace Engine
             // default window and world size
             windowSize = new Point(1024, 768);
             worldSize = new Point(1024, 768);
+            camera = new Camera();
         }
 
         /// <summary>
@@ -89,6 +96,10 @@ namespace Engine
         protected override void Update(GameTime gameTime)
         {
             HandleInput();
+            Offset = new Vector2(200,0);
+            Console.WriteLine(Offset);
+      //      Offset = camera.CameraPosition;
+
             GameStateManager.Update(gameTime);
         }
 
@@ -122,7 +133,7 @@ namespace Engine
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, spriteScale);
 
             // let the game world draw itself
-            GameStateManager.Draw(gameTime, spriteBatch);
+            GameStateManager.Draw(gameTime, spriteBatch, Offset);
 
             spriteBatch.End();
         }

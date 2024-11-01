@@ -1,23 +1,23 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
 namespace Engine
 {
 
     public class Camera
     {
-        public Vector2 position;
+        private Vector2 cameraPosition;
 
-        public Camera(Vector2 position)
+        public Camera()
         {
-            this.position = position;
         }
 
-        public void CameraFollow(Rectangle m, Vector2 ScreenSize)
+        public void Follow(Rectangle player)
         {
-            position = new Vector2(m.X + (ScreenSize.X / 2 - m.Width / 2), m.Y + (ScreenSize.Y / 2 - m.Height / 2));
-
+            Vector2 screenSize = new Vector2(1024, 768);
+            cameraPosition = new Vector2(player.X +player.Width / 2 - screenSize.X / 2, player.Y + player.Height / 2 - screenSize.Y / 2);
         }
+
+        public Vector2 CameraPosition
+        { get { return cameraPosition; } }
     }
 }

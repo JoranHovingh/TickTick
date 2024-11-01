@@ -73,11 +73,11 @@ class PlayingState : GameState, IPlayingState
         gameOverOverlay.Visible = !level.Player.IsAlive;
     }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 Offset)
     {
-        base.Draw(gameTime, spriteBatch);
+        base.Draw(gameTime, spriteBatch, Offset);
         if (level != null)
-            level.Draw(gameTime, spriteBatch);
+            level.Draw(gameTime, spriteBatch, Offset);
     }
 
     public void LoadLevel(int levelIndex)

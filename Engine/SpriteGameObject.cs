@@ -32,7 +32,6 @@ namespace Engine
         /// A larger value means that the object will be drawn on top.
         /// </summary>
         protected float depth;
-
         /// <summary>
         /// Creates a new SpriteGameObject with a given sprite name.
         /// </summary>
@@ -43,8 +42,11 @@ namespace Engine
         {
             this.depth = depth;
 
-            if (spriteName != null)
+            if (spriteName != null) 
                 sprite = new SpriteSheet(spriteName, depth, sheetIndex);
+
+
+                
             Origin = Vector2.Zero;
         }
 
@@ -54,14 +56,14 @@ namespace Engine
         /// </summary>
         /// <param name="gameTime">An object containing information about the time that has passed in the game.</param>
         /// <param name="spriteBatch">A sprite batch object used for drawing sprites.</param>
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 Offset)
         {
             if (!Visible)
                 return;
 
             // draw the sprite at its *global* position in the game world
             if (sprite != null)
-                sprite.Draw(spriteBatch, GlobalPosition, Origin);
+                sprite.Draw(spriteBatch, GlobalPosition - Offset, Origin);
         }
 
         /// <summary>

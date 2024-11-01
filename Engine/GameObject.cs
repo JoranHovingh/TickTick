@@ -66,7 +66,7 @@ namespace Engine
         /// </summary>
         /// <param name="gameTime">An object containing information about the time that has passed.</param>
         /// <param name="spriteBatch">The sprite batch to use.</param>
-        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 Offset)
         {
         }
 
