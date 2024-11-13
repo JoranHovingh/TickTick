@@ -270,7 +270,7 @@ class Player : AnimatedGameObject
         }
     }
 
-    Rectangle BoundingBoxForCollisions
+    public Rectangle BoundingBoxForCollisions
     {
         get
         {

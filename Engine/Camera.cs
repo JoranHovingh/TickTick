@@ -4,24 +4,27 @@ namespace Engine
 {
     public class Camera
     {
-        public Vector2 Position { get; private set; }
-        public Rectangle Viewport { get; private set; }
+        private int viewportWidth;
+        private int viewportHeight;
+        private Point worldSize = new Point(1024, 768);
 
-        // Stel de camera in voor de grootte van het scherm (viewport)
         public Camera(int viewportWidth, int viewportHeight)
         {
-            Position = Vector2.Zero; // Begin de camera op de 0,0 positie
-            Viewport = new Rectangle(0, 0, viewportWidth, viewportHeight);
+            // Set the Viewport to the correct width and height
+            this.viewportWidth = viewportWidth;
+            this.viewportHeight = viewportHeight;
         }
 
-        // Volg de speler en bereken tegelijkertijd de offset voor het tekenen
-        public Vector2 CameraOffset(Vector2 playerPosition)
+        public Vector2 CameraOffset(Rectangle player)
         {
-            // Volg de speler zodat deze in het midden van het scherm blijft
-            Position = playerPosition - new Vector2(Viewport.Width / 2, Viewport.Height / 2);
+            // Calculate the camera's offset based on the player's position
+            // Ensure the camera does not go outside the bounds of the world
+            float cameraX = MathHelper.Clamp(player.X + player.Width / 2 - viewportWidth / 2, 0, worldSize.X - viewportWidth);
+            float cameraY = MathHelper.Clamp(player.Y + player.Height / 2 - viewportHeight / 2, 0, worldSize.Y - viewportHeight);
 
-            // Retourneer de offset op basis van de camera-positie
-            return Position; // Negatief omdat we van de wereldpositie de camera-positie aftrekken
+            return new Vector2(cameraX, cameraY);
         }
+
+        
     }
 }

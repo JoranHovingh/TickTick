@@ -9,15 +9,16 @@ class PlayingState : GameState, IPlayingState
     Level level;
     Button quitButton;
     SpriteGameObject completedOverlay, gameOverOverlay;
+    private GraphicsDevice graphicsDevice;
     Vector2 Offset { get { return level.offset; } }
 
-    public PlayingState()
+    public PlayingState(GraphicsDevice graphicsDevice)
     {
+        this.graphicsDevice = graphicsDevice;
         // add a "quit" button
         quitButton = new Button("Sprites/UI/spr_button_quit", 1);
         quitButton.LocalPosition = new Vector2(1290, 20);
         gameObjects.AddChild(quitButton);
-
         // add overlay images
         completedOverlay = AddOverlay("Sprites/UI/spr_welldone");
         gameOverOverlay = AddOverlay("Sprites/UI/spr_gameover");
@@ -86,7 +87,7 @@ class PlayingState : GameState, IPlayingState
 
     public void LoadLevel(int levelIndex)
     {
-        level = new Level(levelIndex, ExtendedGame.ContentRootDirectory + "/Levels/level" + levelIndex + ".txt");
+        level = new Level(levelIndex, ExtendedGame.ContentRootDirectory + "/Levels/level" + levelIndex + ".txt", graphicsDevice);
 
         // hide the overlay images
         completedOverlay.Visible = false;

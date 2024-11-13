@@ -12,7 +12,7 @@ partial class Level : GameObjectList
     Tile[,] tiles;
     List<WaterDrop> waterDrops;
 
-    private Camera camera;
+    Camera camera;
 
     public Player Player { get; private set; }
     public int LevelIndex { get; private set; }
@@ -24,11 +24,11 @@ partial class Level : GameObjectList
 
     public Vector2 offset;
 
-    public Level(int levelIndex, string filename)
+    public Level(int levelIndex, string filename, GraphicsDevice graphicsDevice)
     {
         LevelIndex = levelIndex;
 
-        camera = new Camera(1024, 586);
+        camera = new Camera(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
 
         // load the background
         GameObjectList backgrounds = new GameObjectList();
@@ -115,7 +115,7 @@ partial class Level : GameObjectList
         base.Update(gameTime);
 
         // Update the cameraOffset
-        offset = camera.CameraOffset(Player.LocalPosition);
+        offset = camera.CameraOffset(Player.BoundingBoxForCollisions);
 
         // check if we've finished the level
         if (!completionDetected && AllDropsCollected && Player.HasPixelPreciseCollision(goal))

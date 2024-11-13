@@ -42,7 +42,7 @@ class TickTick : ExtendedGameWithLevels
         GameStateManager.AddGameState(StateName_Title, new TitleMenuState());
         GameStateManager.AddGameState(StateName_LevelSelect, new LevelMenuState());
         GameStateManager.AddGameState(StateName_Help, new HelpState());
-        GameStateManager.AddGameState(StateName_Playing, new PlayingState());
+        GameStateManager.AddGameState(StateName_Playing, new PlayingState(GraphicsDevice));
 
         // start at the title screen
         GameStateManager.SwitchTo(StateName_Title);
