@@ -1,29 +1,27 @@
-﻿using Engine;
-using Microsoft.Xna.Framework;
-using System;
+﻿using Microsoft.Xna.Framework;
+
 namespace Engine
 {
-
     public class Camera
     {
-        private Vector2 cameraPosition;
-        
-        public Camera()
+        public Vector2 Position { get; private set; }
+        public Rectangle Viewport { get; private set; }
+
+        // Stel de camera in voor de grootte van het scherm (viewport)
+        public Camera(int viewportWidth, int viewportHeight)
         {
+            Position = Vector2.Zero; // Begin de camera op de 0,0 positie
+            Viewport = new Rectangle(0, 0, viewportWidth, viewportHeight);
         }
 
-        public void Follow(Vector2 player)
+        // Volg de speler en bereken tegelijkertijd de offset voor het tekenen
+        public Vector2 CameraOffset(Vector2 playerPosition)
         {
-            Vector2 screenSize = new Vector2(1024, 768);
-            cameraPosition = new Vector2(
-                player.X / 2 - screenSize.X / 2,
-               player.Y / 2 - screenSize.Y / 2
-            );
-            //cameraPosition = new Vector2(200, 0);
+            // Volg de speler zodat deze in het midden van het scherm blijft
+            Position = playerPosition - new Vector2(Viewport.Width / 2, Viewport.Height / 2);
 
-            Console.WriteLine($"Camera position: {cameraPosition}"); // Controle voor debuggen
+            // Retourneer de offset op basis van de camera-positie
+            return Position; // Negatief omdat we van de wereldpositie de camera-positie aftrekken
         }
-
-        public Vector2 CameraPosition{ get { return cameraPosition; } }
     }
 }

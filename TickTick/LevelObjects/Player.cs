@@ -23,7 +23,6 @@ class Player : AnimatedGameObject
 
     Level level;
 
-    Camera camera;
     Vector2 startPosition;
     
     bool isCelebrating; // Whether or not the player is celebrating a level victory.
@@ -40,8 +39,6 @@ class Player : AnimatedGameObject
     {
         this.level = level;
         this.startPosition = startPosition;
-
-        camera = new Camera();
 
         // load all animations
         LoadAnimation("Sprites/LevelObjects/Player/spr_idle", "idle", true, 0.1f);
@@ -164,10 +161,7 @@ class Player : AnimatedGameObject
                 level.Timer.Multiplier = 2;
             else
                 level.Timer.Multiplier = 1;
-        }
-
-        //camera.Follow(localPosition);
-            
+        } 
     }
 
     void ApplyFriction(GameTime gameTime)
