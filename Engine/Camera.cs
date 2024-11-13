@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
@@ -6,13 +7,14 @@ namespace Engine
     {
         private int viewportWidth;
         private int viewportHeight;
-        private Point worldSize = new Point(1024, 768);
+        private Point worldSize;
 
-        public Camera(int viewportWidth, int viewportHeight)
+        public Camera(GraphicsDevice graphicsDevice, Point worldsize)
         {
             // Set the Viewport to the correct width and height
-            this.viewportWidth = viewportWidth;
-            this.viewportHeight = viewportHeight;
+            this.viewportWidth = graphicsDevice.Viewport.Width;
+            this.viewportHeight = graphicsDevice.Viewport.Height;
+            this.worldSize = worldsize;
         }
 
         public Vector2 CameraOffset(Rectangle player)

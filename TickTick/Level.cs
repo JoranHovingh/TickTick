@@ -28,8 +28,6 @@ partial class Level : GameObjectList
     {
         LevelIndex = levelIndex;
 
-        camera = new Camera(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
-
         // load the background
         GameObjectList backgrounds = new GameObjectList();
         SpriteGameObject backgroundSky = new SpriteGameObject("Sprites/Backgrounds/spr_sky", TickTick.Depth_Background);
@@ -61,6 +59,8 @@ partial class Level : GameObjectList
         // add clouds
         for (int i = 0; i < 6; i++)
             backgrounds.AddChild(new Cloud(this));
+
+        camera = new Camera(graphicsDevice, new Point(tiles.GetLength(0) * TileWidth, tiles.GetLength(1) * TileHeight));
     }
    
     public Rectangle BoundingBox
