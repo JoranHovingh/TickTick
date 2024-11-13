@@ -62,7 +62,7 @@ partial class Level : GameObjectList
         for (int i = 0; i < 6; i++)
             backgrounds.AddChild(new Cloud(this));
     }
-
+   
     public Rectangle BoundingBox
     {
         get
