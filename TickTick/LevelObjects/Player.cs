@@ -16,7 +16,7 @@ class Player : AnimatedGameObject
     const float airFriction = 5; // Friction factor that determines how much (horizontal) air resistance there is.
 
     bool facingLeft; // Whether or not the character is currently looking to the left.
-
+    bool isBoosted = false;
     bool isGrounded; // Whether or not the character is currently standing on something.
     bool standingOnIceTile, standingOnHotTile; // Whether or not the character is standing on an ice tile or a hot tile.
     float desiredHorizontalSpeed; // The horizontal speed at which the character would like to move.
@@ -140,7 +140,10 @@ class Player : AnimatedGameObject
     {
         Vector2 previousPosition = localPosition;
         if (CanCollideWithObjects)
-            ApplyFriction(gameTime);
+        {
+           ApplyFriction(gameTime); 
+        }
+
         else
             velocity.X = 0;
 
@@ -166,6 +169,10 @@ class Player : AnimatedGameObject
 
     void ApplyFriction(GameTime gameTime)
     {
+        if (isBoosted)
+        {
+            velocity.X = desiredHorizontalSpeed;
+        }
         // determine the friction coefficient for the character
         float friction;
         if (standingOnIceTile)
@@ -309,6 +316,18 @@ class Player : AnimatedGameObject
 
         // stop moving
         velocity = Vector2.Zero;
+    }
+
+    public void IncreaseSpeed(float speedAmount)
+    {
+        desiredHorizontalSpeed += speedAmount;
+        isBoosted = true;
+    }
+
+    public void DecreaseSpeed(float speedAmount)
+    {
+        desiredHorizontalSpeed -= speedAmount;
+        isBoosted = false;
     }
 }
 

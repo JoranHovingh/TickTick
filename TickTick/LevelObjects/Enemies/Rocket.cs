@@ -1,7 +1,6 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
 using System;
-using System.Security.Cryptography.X509Certificates;
 
 /// <summary>
 /// Represents a rocket enemy that flies horizontally through the screen.
@@ -11,12 +10,12 @@ class Rocket : AnimatedGameObject
     Level level;
     Vector2 startPosition;
     const float speed = 500;
-    private bool IsDead = false;
+    public bool IsAlive { get; private set; }
 
     public Rocket(Level level, Vector2 startPosition, bool facingLeft) 
         : base(TickTick.Depth_LevelObjects)
     {
-        if (!IsDead)
+        if (!IsAlive)
         {
             this.level = level;
 
@@ -44,7 +43,7 @@ class Rocket : AnimatedGameObject
         // go back to the starting position
         LocalPosition = startPosition;
         // Makes the rocket visible
-        IsDead = false;
+        IsAlive = false;
         Visible = true;
     }
 
@@ -67,12 +66,12 @@ class Rocket : AnimatedGameObject
             {
                 if (PlayerCollidesOnTop(level.Player))
                 {
-                    IsDead = true;
+                    IsAlive = true;
                     Visible = false;
                 }
                 else
                 {
-                    if (!IsDead)
+                    if (!IsAlive)
                     {
                         level.Player.Die();
                     }
@@ -85,7 +84,7 @@ class Rocket : AnimatedGameObject
     // Checks if the player collides with the upper 3 pixels of the rocketboundingbox
     public bool PlayerCollidesOnTop(Player player)
     {
-        Rectangle rocketTop = new Rectangle(BoundingBox.X, BoundingBox.Y, Width, 3);
+        Rectangle rocketTop = new Rectangle(BoundingBox.X, BoundingBox.Y, Width, 1);
         return rocketTop.Intersects(player.BoundingBox); 
     }
 }

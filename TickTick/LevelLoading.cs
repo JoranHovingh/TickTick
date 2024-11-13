@@ -105,6 +105,8 @@ partial class Level : GameObjectList
             LoadTurtleEnemy(x, y);
         else if (symbol == 'S')
             LoadSparkyEnemy(x, y);
+        else if (symbol == 'P')
+            LoadPowerUp(x, y);
         else if (symbol == 'A' || symbol == 'B' || symbol == 'C')
             LoadFlameEnemy(x, y, symbol);
     }
@@ -177,6 +179,12 @@ partial class Level : GameObjectList
         AddChild(s);
     }
 
+    void LoadPowerUp(int x, int y)
+    {
+        PowerUp p = new PowerUp(this, GetCellBottomCenter(x, y));
+        AddChild(p);
+    }
+
     void LoadFlameEnemy(int x, int y, char symbol)
     {
         Vector2 pos = GetCellBottomCenter(x, y);
@@ -191,6 +199,8 @@ partial class Level : GameObjectList
 
         AddChild(enemy);
     }
+
+    
 
     Vector2 GetCellBottomCenter(int x, int y)
     {
