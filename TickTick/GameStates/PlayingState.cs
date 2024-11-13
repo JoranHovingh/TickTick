@@ -9,7 +9,7 @@ class PlayingState : GameState, IPlayingState
     Level level;
     Button quitButton;
     SpriteGameObject completedOverlay, gameOverOverlay;
-    Camera camera;
+    Vector2 Offset { get { return level.offset; } }
 
     public PlayingState()
     {
@@ -32,6 +32,8 @@ class PlayingState : GameState, IPlayingState
         gameObjects.AddChild(result);
         return result;
     }
+
+    
 
     public override void HandleInput(InputHelper inputHelper)
     {
@@ -76,7 +78,7 @@ class PlayingState : GameState, IPlayingState
         gameOverOverlay.Visible = !level.Player.IsAlive;
     }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 Offset)
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 offset)
     {
         base.Draw(gameTime, spriteBatch, Offset);
         if (level != null)
