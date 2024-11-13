@@ -1,5 +1,6 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
@@ -11,6 +12,8 @@ partial class Level : GameObjectList
     Tile[,] tiles;
     List<WaterDrop> waterDrops;
 
+    private Camera camera;
+
     public Player Player { get; private set; }
     public int LevelIndex { get; private set; }
 
@@ -19,9 +22,13 @@ partial class Level : GameObjectList
 
     bool completionDetected;
 
+    public Vector2 offset;
+
     public Level(int levelIndex, string filename)
     {
         LevelIndex = levelIndex;
+
+        camera = new Camera(1024, 586);
 
         // load the background
         GameObjectList backgrounds = new GameObjectList();
@@ -106,6 +113,9 @@ partial class Level : GameObjectList
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        // Update the cameraOffset
+        offset = camera.CameraOffset(Player.LocalPosition);
 
         // check if we've finished the level
         if (!completionDetected && AllDropsCollected && Player.HasPixelPreciseCollision(goal))
