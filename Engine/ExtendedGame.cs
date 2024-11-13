@@ -96,9 +96,9 @@ namespace Engine
         protected override void Update(GameTime gameTime)
         {
             HandleInput();
-            Offset = new Vector2(200,0);
-            Console.WriteLine(Offset);
-      //      Offset = camera.CameraPosition;
+            //Offset = new Vector2(200,0);
+            //Console.WriteLine(Offset);
+            //Offset = camera.CameraPosition;
 
             GameStateManager.Update(gameTime);
         }

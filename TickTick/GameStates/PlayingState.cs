@@ -9,6 +9,7 @@ class PlayingState : GameState, IPlayingState
     Level level;
     Button quitButton;
     SpriteGameObject completedOverlay, gameOverOverlay;
+    Camera camera;
 
     public PlayingState()
     {
@@ -20,6 +21,7 @@ class PlayingState : GameState, IPlayingState
         // add overlay images
         completedOverlay = AddOverlay("Sprites/UI/spr_welldone");
         gameOverOverlay = AddOverlay("Sprites/UI/spr_gameover");
+        camera = new Camera();
     }
 
     SpriteGameObject AddOverlay(string spriteName)
@@ -67,6 +69,7 @@ class PlayingState : GameState, IPlayingState
         base.Update(gameTime);
 
         if (level != null)
+            camera.Follow(level.Player.LocalPosition);
             level.Update(gameTime);
 
         // show or hide the "game over" image

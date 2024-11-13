@@ -166,7 +166,7 @@ class Player : AnimatedGameObject
                 level.Timer.Multiplier = 1;
         }
 
-        camera.Follow(BoundingBoxForCollisions);
+        //camera.Follow(localPosition);
             
     }
 
