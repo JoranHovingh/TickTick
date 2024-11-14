@@ -169,10 +169,6 @@ class Player : AnimatedGameObject
 
     void ApplyFriction(GameTime gameTime)
     {
-        if (isBoosted)
-        {
-            velocity.X = desiredHorizontalSpeed;
-        }
         // determine the friction coefficient for the character
         float friction;
         if (standingOnIceTile)
@@ -320,13 +316,13 @@ class Player : AnimatedGameObject
 
     public void IncreaseSpeed(float speedAmount)
     {
-        desiredHorizontalSpeed += speedAmount;
+        velocity.X += speedAmount;
         isBoosted = true;
     }
 
     public void DecreaseSpeed(float speedAmount)
     {
-        desiredHorizontalSpeed -= speedAmount;
+        velocity.X -= speedAmount;
         isBoosted = false;
     }
 }

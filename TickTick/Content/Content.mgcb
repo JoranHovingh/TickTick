@@ -303,6 +303,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/LevelObjects/PowerUp.png.png
 
+#begin Sprites/LevelObjects/PowerUp.png.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/LevelObjects/PowerUp.png.png
+
 #begin Sprites/LevelObjects/Rocket/spr_rocket@3.png
 /importer:TextureImporter
 /processor:TextureProcessor
