@@ -1,6 +1,5 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
-using System;
 
 /// <summary>
 /// Represents a rocket enemy that flies horizontally through the screen.

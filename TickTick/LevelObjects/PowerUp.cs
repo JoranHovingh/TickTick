@@ -1,13 +1,11 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
-using System.Reflection.Emit;
 
 class PowerUp : SpriteGameObject
 { 
     private Level level; 
     private const int speedBoost = 500;
     private float timer;
-   
     Vector2 startPosition;
     public bool IsActive { get; private set; }
     public bool IsAlive { get; private set;  }

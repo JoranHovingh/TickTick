@@ -17,7 +17,6 @@ class Player : AnimatedGameObject
     const float airFriction = 5; // Friction factor that determines how much (horizontal) air resistance there is.
 
     bool facingLeft; // Whether or not the character is currently looking to the left.
-    bool isBoosted = false;
     bool isGrounded; // Whether or not the character is currently standing on something.
     bool standingOnIceTile, standingOnHotTile; // Whether or not the character is standing on an ice tile or a hot tile.
     public float desiredHorizontalSpeed; // The horizontal speed at which the character would like to move.
@@ -321,13 +320,11 @@ class Player : AnimatedGameObject
     public void IncreaseSpeed(float speedAmount)
     {
         walkingSpeed += speedAmount;
-        isBoosted = true;
     }
 
     public void DecreaseSpeed(float speedAmount)
     {
         walkingSpeed -= speedAmount;
-        isBoosted = false;
     }
 }
 
