@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 
 partial class Level : GameObjectList
 {
@@ -27,8 +28,6 @@ partial class Level : GameObjectList
     public Level(int levelIndex, string filename, GraphicsDevice graphicsDevice)
     {
         LevelIndex = levelIndex;
-
-        camera = new Camera(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
 
         // load the background
         GameObjectList backgrounds = new GameObjectList();
@@ -61,6 +60,8 @@ partial class Level : GameObjectList
         // add clouds
         for (int i = 0; i < 6; i++)
             backgrounds.AddChild(new Cloud(this));
+
+        camera = new Camera(graphicsDevice, new Point(tiles.GetLength(0) * TileWidth, tiles.GetLength(1) * TileHeight));
     }
    
     public Rectangle BoundingBox
@@ -113,6 +114,14 @@ partial class Level : GameObjectList
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        float playerSpeed = Player.desiredHorizontalSpeed;
+
+        if (playerSpeed > 0)
+            camera.CameraDirection(1);
+        else if (playerSpeed < 0)
+            camera.CameraDirection(-1);
+        else camera.CameraDirection(0);
 
         // Update the cameraOffset
         offset = camera.CameraOffset(Player.BoundingBoxForCollisions);

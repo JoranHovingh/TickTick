@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace Engine
 {
@@ -13,10 +15,13 @@ namespace Engine
         /// </summary>
         protected SpriteSheet sprite;
 
+        Camera camera;
         /// <summary>
         /// The origin ('offset') to use when drawing the sprite on the screen.
         /// </summary>
         public Vector2 Origin { get; set; }
+
+        private string spriteName;
 
         /// <summary>
         /// The sheet index of the attached sprite sheet.
@@ -42,11 +47,11 @@ namespace Engine
         {
             this.depth = depth;
 
-            if (spriteName != null) 
-                sprite = new SpriteSheet(spriteName, depth, sheetIndex);
+            if (spriteName != null)
+            sprite = new SpriteSheet(spriteName, depth, sheetIndex);
 
+            this.spriteName = spriteName;
 
-                
             Origin = Vector2.Zero;
         }
 
@@ -61,9 +66,14 @@ namespace Engine
             if (!Visible)
                 return;
 
-            // draw the sprite at its *global* position in the game world
             if (sprite != null)
-                sprite.Draw(spriteBatch, GlobalPosition - Offset, Origin);
+            {
+                if (UIElemet(spriteName))
+                    sprite.Draw(spriteBatch, GlobalPosition, Origin);
+                else if (Mountain(spriteName)) ;
+                //sprite.Draw(spriteBatch, GlobalPosition - Offset * camera.CameraSpeed(spriteName), Origin);
+                else sprite.Draw(spriteBatch, GlobalPosition - Offset, Origin);
+            }
         }
 
         /// <summary>
@@ -162,6 +172,17 @@ namespace Engine
 
             // otherwise, there is no collision
             return false;
+        }
+
+        private bool UIElemet(string spriteName)
+        {
+            if (spriteName == null) return false;
+            return spriteName.Contains("UI") ;
+        }
+        private bool Mountain(string spriteName)
+        {
+            if (spriteName == null) return false;
+            return spriteName.Contains("mountain");
         }
     }
 }
