@@ -68,10 +68,10 @@ namespace Engine
 
             if (sprite != null)
             {
-                if (UIElemet(spriteName))
+                if (UIElement(spriteName))
                     sprite.Draw(spriteBatch, GlobalPosition, Origin);
-                else if (Mountain(spriteName)) ;
-                //sprite.Draw(spriteBatch, GlobalPosition - Offset * camera.CameraSpeed(spriteName), Origin);
+                else if (Mountain(spriteName))
+                    sprite.Draw(spriteBatch, GlobalPosition - new Vector2(Offset.X * depth * 50, Offset.Y), Origin);
                 else sprite.Draw(spriteBatch, GlobalPosition - Offset, Origin);
             }
         }
@@ -174,7 +174,7 @@ namespace Engine
             return false;
         }
 
-        private bool UIElemet(string spriteName)
+        private bool UIElement(string spriteName)
         {
             if (spriteName == null) return false;
             return spriteName.Contains("UI") ;

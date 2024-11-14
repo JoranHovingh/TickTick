@@ -1,6 +1,7 @@
 using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Net.Http.Headers;
 
@@ -72,6 +73,9 @@ class Player : AnimatedGameObject
     {
         if (!CanCollideWithObjects)
             return;
+
+        if (inputHelper.MouseLeftButtonPressed() && BoundingBoxForCollisions.Contains(inputHelper.MousePositionWorld + level.offset))
+            ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_player_explode");
 
         // arrow keys: move left or right
         if (inputHelper.KeyDown(Keys.Left))

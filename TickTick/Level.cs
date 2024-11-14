@@ -9,12 +9,14 @@ partial class Level : GameObjectList
 {
     public const int TileWidth = 72;
     public const int TileHeight = 55;
+    private double timerValue = 30;
+
 
     Tile[,] tiles;
     List<WaterDrop> waterDrops;
 
     Camera camera;
-
+    GraphicsDevice graphicsDevice;
     public Player Player { get; private set; }
     public int LevelIndex { get; private set; }
 
@@ -41,7 +43,7 @@ partial class Level : GameObjectList
         LoadLevelFromFile(filename);
 
         // add the timer
-        timer = new BombTimer();
+        timer = new BombTimer(timerValue);
         AddChild(timer);
 
         // add mountains in the background
@@ -115,17 +117,10 @@ partial class Level : GameObjectList
     {
         base.Update(gameTime);
 
-        float playerSpeed = Player.desiredHorizontalSpeed;
-
-        if (playerSpeed > 0)
-            camera.CameraDirection(1);
-        else if (playerSpeed < 0)
-            camera.CameraDirection(-1);
-        else camera.CameraDirection(0);
-
         // Update the cameraOffset
         offset = camera.CameraOffset(Player.BoundingBoxForCollisions);
 
+            
         // check if we've finished the level
         if (!completionDetected && AllDropsCollected && Player.HasPixelPreciseCollision(goal))
         {

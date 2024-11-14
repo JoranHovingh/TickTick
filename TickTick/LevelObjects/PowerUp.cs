@@ -6,7 +6,7 @@ class PowerUp : SpriteGameObject
 { 
     private Level level; 
     
-    private const int speedBoost = 600;
+    private const int speedBoost = 500;
     private float timer;
    
     Vector2 startPosition;
