@@ -6,15 +6,19 @@ class BombTimer : GameObjectList
 {
     double timeLeft;
 
+    double timerValue;
     public bool Running { get; set; }
     public float Multiplier { get; set; }
 
     TextGameObject label;
 
+    Level level;
+
     public bool HasPassed { get { return timeLeft <= 0; } }
 
-    public BombTimer()
+    public BombTimer(double timerValue)
     {
+        this.timerValue = timerValue;
         localPosition = new Vector2(20, 20);
         
         // add a background image
@@ -62,7 +66,7 @@ class BombTimer : GameObjectList
     public override void Reset()
     {
         base.Reset();
-        timeLeft = 30;
+        timeLeft = timerValue;
         Running = true;
         Multiplier = 1;
     }

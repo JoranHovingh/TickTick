@@ -22,8 +22,13 @@ partial class Level : GameObjectList
         {
             if (line.Length > gridWidth)
                 gridWidth = line.Length;
-
             gridRows.Add(line);
+
+            if (line.Contains("timer="))
+            {
+                string[] parts = line.Split('=');
+                timerValue = int.Parse(parts[1]);
+            }
             line = reader.ReadLine();
         }
 
@@ -50,7 +55,6 @@ partial class Level : GameObjectList
         hintText.Text = description;
         hintText.LocalPosition = new Vector2(510, 40);
         AddChild(hintText);
-        
     }
 
     void AddPlayingField(List<string> gridRows, int gridWidth, int gridHeight)
@@ -79,7 +83,6 @@ partial class Level : GameObjectList
                 AddTile(x, y, symbol);
             }
         }
-
     }
 
     void AddTile(int x, int y, char symbol)
