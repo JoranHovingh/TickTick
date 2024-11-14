@@ -56,6 +56,7 @@ class Player : AnimatedGameObject
         localPosition = startPosition;
         velocity = Vector2.Zero;
         desiredHorizontalSpeed = 0;
+        walkingSpeed = 400;
 
         // start with the idle sprite
         PlayAnimation("idle", true);
