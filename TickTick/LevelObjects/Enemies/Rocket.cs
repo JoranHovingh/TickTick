@@ -65,12 +65,12 @@ class Rocket : AnimatedGameObject
             {
                 if (PlayerCollidesOnTop(level.Player) && level.Player.IsFalling)
                 {
-                    IsAlive = false;
+                    IsAlive = true;
                     Visible = false;
                 }
                 else
                 {
-                    if (IsAlive)
+                    if (!IsAlive)
                     {
                         level.Player.Die();
                     }
