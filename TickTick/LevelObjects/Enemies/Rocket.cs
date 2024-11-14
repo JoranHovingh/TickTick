@@ -1,6 +1,5 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
-using System;
 
 /// <summary>
 /// Represents a rocket enemy that flies horizontally through the screen.
@@ -66,12 +65,12 @@ class Rocket : AnimatedGameObject
             {
                 if (PlayerCollidesOnTop(level.Player) && level.Player.IsFalling)
                 {
-                    IsAlive = true;
+                    IsAlive = false;
                     Visible = false;
                 }
                 else
                 {
-                    if (!IsAlive)
+                    if (IsAlive)
                     {
                         level.Player.Die();
                     }
