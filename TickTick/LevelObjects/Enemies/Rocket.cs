@@ -64,7 +64,7 @@ class Rocket : AnimatedGameObject
         {
             if (HasPixelPreciseCollision(level.Player))
             {
-                if (PlayerCollidesOnTop(level.Player))
+                if (PlayerCollidesOnTop(level.Player) && level.Player.IsFalling)
                 {
                     IsAlive = true;
                     Visible = false;

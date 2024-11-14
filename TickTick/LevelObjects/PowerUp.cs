@@ -4,10 +4,11 @@ using System.Reflection.Emit;
 
 class PowerUp : SpriteGameObject
 { 
-    private Level level;
-    private float powerUpDuration = 200f; 
-    private int speedBoost = 2000;
-    private float timer = 0f;
+    private Level level; 
+    
+    private const int speedBoost = 600;
+    private float timer;
+   
     Vector2 startPosition;
     public bool IsActive { get; private set; }
     public bool IsAlive { get; private set;  }
@@ -37,9 +38,9 @@ class PowerUp : SpriteGameObject
             // Als de boost actief is, start timer en reset de snelheid na afloop
             if (!IsActive)
             {
-                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (timer >= powerUpDuration)
+                if (timer <= 0)
                 {
                     level.Player.DecreaseSpeed(speedBoost);
                     IsAlive = false;
@@ -53,7 +54,7 @@ class PowerUp : SpriteGameObject
         localPosition = startPosition;
         IsAlive = true;
         IsActive = true;
-        timer = 0.0f;
+        timer = 3f;
         Visible = true;
     }
 }

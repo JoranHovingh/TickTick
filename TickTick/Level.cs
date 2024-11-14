@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 
 partial class Level : GameObjectList
 {
@@ -113,6 +114,14 @@ partial class Level : GameObjectList
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        float playerSpeed = Player.desiredHorizontalSpeed;
+
+        if (playerSpeed > 0)
+            camera.CameraDirection(1);
+        else if (playerSpeed < 0)
+            camera.CameraDirection(-1);
+        else camera.CameraDirection(0);
 
         // Update the cameraOffset
         offset = camera.CameraOffset(Player.BoundingBoxForCollisions);

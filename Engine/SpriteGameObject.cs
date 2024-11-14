@@ -15,6 +15,7 @@ namespace Engine
         /// </summary>
         protected SpriteSheet sprite;
 
+        Camera camera;
         /// <summary>
         /// The origin ('offset') to use when drawing the sprite on the screen.
         /// </summary>
@@ -67,8 +68,11 @@ namespace Engine
 
             if (sprite != null)
             {
-                if (!UIElemet(spriteName)) sprite.Draw(spriteBatch, GlobalPosition - Offset, Origin);
-                else sprite.Draw(spriteBatch, GlobalPosition, Origin);
+                if (UIElemet(spriteName))
+                    sprite.Draw(spriteBatch, GlobalPosition, Origin);
+                else if (Mountain(spriteName)) ;
+                //sprite.Draw(spriteBatch, GlobalPosition - Offset * camera.CameraSpeed(spriteName), Origin);
+                else sprite.Draw(spriteBatch, GlobalPosition - Offset, Origin);
             }
         }
 
@@ -174,6 +178,11 @@ namespace Engine
         {
             if (spriteName == null) return false;
             return spriteName.Contains("UI") ;
+        }
+        private bool Mountain(string spriteName)
+        {
+            if (spriteName == null) return false;
+            return spriteName.Contains("mountain");
         }
     }
 }

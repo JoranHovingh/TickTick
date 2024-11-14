@@ -3,11 +3,13 @@ using Engine.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.ComponentModel.Design;
 
 class PlayingState : GameState, IPlayingState
 {
     Level level;
     Button quitButton;
+    Camera camera;
     SpriteGameObject completedOverlay, gameOverOverlay;
     private GraphicsDevice graphicsDevice;
     Vector2 Offset { get { return level.offset; } }

@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 
 class Player : AnimatedGameObject
 {
-    const float walkingSpeed = 400; // Standard walking speed, in game units per second.
+    float walkingSpeed = 400; // Standard walking speed, in game units per second.
     const float jumpSpeed = 900; // Lift-off speed when the character jumps.
     const float gravity = 2300; // Strength of the gravity force that pulls the character down.
     const float maxFallSpeed = 1200; // The maximum vertical speed at which the character can fall.
@@ -19,7 +19,7 @@ class Player : AnimatedGameObject
     bool isBoosted = false;
     bool isGrounded; // Whether or not the character is currently standing on something.
     bool standingOnIceTile, standingOnHotTile; // Whether or not the character is standing on an ice tile or a hot tile.
-    float desiredHorizontalSpeed; // The horizontal speed at which the character would like to move.
+    public float desiredHorizontalSpeed; // The horizontal speed at which the character would like to move.
 
     Level level;
 
@@ -29,8 +29,6 @@ class Player : AnimatedGameObject
     bool isExploding;
 
     public bool IsAlive { get; private set; }
-
-
     public bool CanCollideWithObjects { get { return IsAlive && !isCelebrating; } }
 
     public bool IsMoving { get { return velocity != Vector2.Zero; } }
@@ -82,6 +80,7 @@ class Player : AnimatedGameObject
             desiredHorizontalSpeed = -walkingSpeed;
             if (isGrounded)
                 PlayAnimation("run");
+
         }
         else if (inputHelper.KeyDown(Keys.Right))
         {
@@ -320,13 +319,13 @@ class Player : AnimatedGameObject
 
     public void IncreaseSpeed(float speedAmount)
     {
-        desiredHorizontalSpeed += speedAmount;
+        walkingSpeed += speedAmount;
         isBoosted = true;
     }
 
     public void DecreaseSpeed(float speedAmount)
     {
-        desiredHorizontalSpeed -= speedAmount;
+        walkingSpeed -= speedAmount;
         isBoosted = false;
     }
 }
